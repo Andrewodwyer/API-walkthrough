@@ -8,9 +8,17 @@ document.getElementById("submit").addEventListener("click", e => postForm(e));
 async function postForm(e) {
     const form = new FormData(document.getElementById("checksform"));
 
-    for (let el of form.entries()) {
-        console.log(el);
-    }
+    // for (let el of form.entries()) {
+    //     console.log(el);
+    // } for loop to check the forms entries using a .entries() method
+
+    const response = await fetch(API_URL, {
+                                method: "POST",
+                                headers: {
+                                            "Authorization": API_KEY,
+        },
+                                body: form,
+    })
 }
 
 async function getStatus(e) {
