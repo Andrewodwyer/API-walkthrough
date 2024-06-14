@@ -21,6 +21,10 @@ function processOptions(form) {
     return form; // append back a string of options to the form
 }
 
+/**
+ * Async functions will always return a value. Using async simply implies that a promise will be returned,
+ * and if a promise is not returned, JavaScript automatically wraps it in a resolved promise with its value.
+ */
 async function postForm(e) {
 
     const form = processOptions(new FormData(document.getElementById("checksform")));
@@ -36,7 +40,7 @@ async function postForm(e) {
         },
         body: form,
     });
-
+//The await operator is used to wait for a Promise. It can be used inside an Async block only. 
     const data = await response.json();
 
     if (response.ok) {
