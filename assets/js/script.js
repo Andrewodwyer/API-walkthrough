@@ -5,13 +5,33 @@ const resultsModal = new bootstrap.Modal(document.getElementById("resultsModal")
 document.getElementById("status").addEventListener("click", e => getStatus(e));
 document.getElementById("submit").addEventListener("click", e => postForm(e));
 
+function processOptions(form) {
+    let optArray = [];
+
+    for (let e of form.entries()) {
+        if (e[0] === "options") {
+            optArray.push(e[1]);
+        }
+    }
+
+    form.delete("options");
+
+    form.append("options", optArray.join()); // .join() converts it back to a spring and seperates it with a commas
+
+    return form; // append back a string of options to the form
+}
+
 async function postForm(e) {
 
-    const form = new FormData(document.getElementById("checksform"));
+    const form = processOptions(new FormData(document.getElementById("checksform")));
 
     // for (let el of form.entries()) {
     //     console.log(el);
     // } for loop to check the forms entries using a .entries() method
+
+    for (let entry of form.entries()) {
+        console.log(entry);
+    }
 
     const response = await fetch(API_URL, {
         method: "POST",
