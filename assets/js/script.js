@@ -109,12 +109,13 @@ function displayStatus(data) {
  */
 function displayException(data) {
 
-    let heading = `An Exception Occured`;
-    results = `<div>The API returned status code ${data.status_code}</div>`;
-    results += `<div class="error-number">Error number: <strong>${data.status_number}</strong></div>`;
-    results += `<div class="error-text">Error text: <strong>${data.error}</strong></div>`;
+    let heading = "An Exception Occurred"
 
-    document.getElementById("resultsModalTitle").innerText = heading; // .innerText when its just text
-    document.getElementById("results-content").innerHTML = results; // .innerHTML when it includes <div>, <span> etc
-    resultsModal.show();
+    results = `<div>The API returned status code ${data.status_code}</div>`;
+    results += `<div>Error number: <strong>${data.error_no}</strong></div>`;
+    results += `<div>Error text: <strong>${data.error}</strong></div>`;
+
+    document.getElementById("resultsModalTitle").innerText = heading;
+    document.getElementById("results-content").innerHTML = results;
+    resultsModal.show(); // displays the modal
 }
