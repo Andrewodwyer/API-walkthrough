@@ -25,13 +25,9 @@ async function postForm(e) {
 
     const form = processOptions(new FormData(document.getElementById("checksform")));
 
-    // for (let el of form.entries()) {
-    //     console.log(el);
-    // } for loop to check the forms entries using a .entries() method
-
-    for (let entry of form.entries()) {
-        console.log(entry);
-    }
+    // for (let entry of form.entries()) {
+    //     console.log(entry);
+    // } for loop to check the forms entries using a .entries() method. this loop was used twice in different parts of the video
 
     const response = await fetch(API_URL, {
         method: "POST",
