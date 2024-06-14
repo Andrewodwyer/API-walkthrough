@@ -42,8 +42,13 @@ async function postForm(e) {
     if (response.ok) {
         displayErrors(data);
     } else {
-        throw new Error(data.error);
+        displayException(data);
+        throw new Error(data.error); // throw is always at the end
     }
+
+    // The throw statement throws a user-defined exception. 
+    // Execution of the current function will stop (the statements after throw won't be executed),
+    // and control will be passed to the first catch block in the call stack.
 
 }
 
@@ -58,10 +63,12 @@ async function getStatus(e) {
     if (response.ok) {
         displayStatus(data);
     } else {
+        displayException(data);
         throw new Error(data.error);
     }
 
 }
+
 
 function displayErrors(data) {
 
@@ -94,4 +101,20 @@ function displayStatus(data) {
     document.getElementById("results-content").innerHTML = results;
     resultsModal.show();
 
+}
+/**
+ * This function is when there is now text in the entry field
+ * Exceptions occur when the API encounters an error processing your request.
+ * format {"error":"No or invalid API key","error_no":3,"status_code":403}
+ */
+function displayException(data) {
+
+    let heading = `An Exception Occured`;
+    results = `<div>The API returned status code ${data.status_code}</div>`;
+    results += `<div class="error-number">Error number: <strong>${data.status_number}</strong></div>`;
+    results += `<div class="error-text">Error text: <strong>${data.error}</strong></div>`;
+
+    document.getElementById("resultsModalTitle").innerText = heading; // .innerText when its just text
+    document.getElementById("results-content").innerHTML = results; // .innerHTML when it includes <div>, <span> etc
+    resultsModal.show();
 }
